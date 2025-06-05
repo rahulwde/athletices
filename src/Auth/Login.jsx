@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { FcGoogle } from "react-icons/fc";
+import { IoMdLogIn } from "react-icons/io";
+
 import { StyledWrapper, StyledWrappered } from '../uverse';
 
  
@@ -42,7 +44,8 @@ const Login = () => {
       <button className="button w-full">
         <div className="blob1" />
         <div className="blob2" />
-        <div className="inner">login</div>
+        <div className="inner flex gap-3 items-center justify-center text-2xl">login <IoMdLogIn  size={25}/>
+</div>
       </button>
     </StyledWrapper>
     </form>
