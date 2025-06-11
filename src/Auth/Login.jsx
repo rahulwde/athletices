@@ -1,13 +1,52 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { use } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FcGoogle } from "react-icons/fc";
 import { IoMdLogIn } from "react-icons/io";
 
 import { StyledWrapper, StyledWrappered } from '../uverse';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../Context/AuthContext';
 
  
 
 const Login = () => {
+   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const {signIn,googleSignIn}= use(AuthContext)
+  const handleLogin = (e) => {
+    e.preventDefault();
+     const form = e.target;
+     const formData = new FormData(form)
+     const email = formData.get("email")
+     const password = formData.get("password")
+     console.log(password,email)
+     signIn(email,password).then((res) => {
+      
+     navigate(from, { replace: true })
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode,errorMessage)
+    // ..
+  });
+
+  };
+
+  const handleGoogleLogin = () => {
+     googleSignIn()
+         .then(result => {
+           Swal.fire("Success", "Google Login successful!", "success");
+           navigate(from, { replace: true })
+         
+         })
+         .catch(error => {
+           Swal.fire("Error", error.message, "error");
+         });
+  };
   return (
       <div className="min-h-screen flex items-center justify-center px-4   bg-cover bg-center"
             style={{
@@ -19,7 +58,7 @@ const Login = () => {
       Login to Swimmer Event
     </h2>
 
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleLogin}>
      <div className='space-y-5'>
        <div >
         <StyledWrappered className='w-full' >
@@ -44,7 +83,7 @@ const Login = () => {
       <button className="button w-full">
         <div className="blob1" />
         <div className="blob2" />
-        <div className="inner flex gap-3 items-center justify-center text-2xl">login <IoMdLogIn  size={25}/>
+        <div className="inner flex gap-3 items-center justify-center text-2xl" type="submit">login <IoMdLogIn  size={25}/>
 </div>
       </button>
     </StyledWrapper>
@@ -56,7 +95,7 @@ const Login = () => {
       <button className="button w-full">
         <div className="blob1" />
         <div className="blob2" />
-        <div className="inner flex  justify-center items-center gap-3">Continue with <FcGoogle  size={25}/>
+        <div className="inner flex  justify-center items-center gap-3" onClick={handleGoogleLogin}>Continue with <FcGoogle  size={25}/>
 </div>
       </button>
     </StyledWrapper>

@@ -1,10 +1,14 @@
  
 import { Link, NavLink } from 'react-router';
+import ThemeToggle from './ThemeToggle';
+import { use } from 'react';
+import { AuthContext } from '../Context/AuthContext';
+import Swal from 'sweetalert2';
  
 
 
 const Navbar = () => {
-  
+  const { user , logOut} = use(AuthContext)
   const links = [
     <>
     <li>
@@ -15,14 +19,14 @@ const Navbar = () => {
         Home
       </NavLink>
       </li>
-      {/* {
+      {
         user && <> 
         <li>
       <NavLink 
-        to="/myApplication" 
+        to="/event" 
         className={({ isActive }) => isActive ? 'active-link' : ''}
       >
-        MyApplication
+         Event
       </NavLink>
       </li>
         </>
@@ -31,10 +35,10 @@ const Navbar = () => {
         user && <> 
         <li>
       <NavLink 
-        to="/addData" 
+        to="/myBooking" 
         className={({ isActive }) => isActive ? 'active-link' : ''}
       >
-        AddData
+        MyBooking
       </NavLink>
       </li>
         </>
@@ -49,13 +53,20 @@ const Navbar = () => {
         MyPostedJOb
       </NavLink>
       </li>
-        </> */}
+        </>}
       {/* } */}
     </>
   ]
-  // const handleLogOut = ()=>{
-  //         logOut().then(res=>console.log(res.user))
-  // }
+  const handleLogOut=()=>{
+    logOut().then(()=>{
+     
+Swal.fire({
+  title: "LogOut successfully",
+  icon: "success",
+  draggable: true
+});
+    })
+ }
   
   return (
     <div className="navbar bg-base-100 shadow-sm rounded-2xl">
@@ -71,7 +82,7 @@ const Navbar = () => {
       </ul>
     </div>
     <div className='p-3'>
-      <img className='w-18' src="https://i.ibb.co/h0MXV8t/swimlogo.webp" alt="" />
+      <img className='w-18' src="https://i.ibb.co/5xnXSnHB/logo2.png" alt="" />
     </div>
   
 
@@ -82,10 +93,10 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-   
+   <ThemeToggle></ThemeToggle>
   </div>{
-    // user?<button className='btn btn-ghost ' onClick={handleLogOut}>logout</button>:<div className='flex gap-3'>  <Link to="/login"><button className='btn btn=primary'>Login</button></Link>
-    //  <Link to="/register"><button className='btn btn=primary'>Register</button></Link></div>
+    user?<button className='btn btn-ghost ' onClick={handleLogOut}>logout</button>:<div className='flex gap-3'>  <Link to="/login"><button className='btn btn=primary'>Login</button></Link>
+     <Link to="/register"><button className='btn btn=primary'>Register</button></Link></div>
   }
 </div>
   );

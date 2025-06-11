@@ -12,7 +12,7 @@ const Banner = () => {
         interval={4000}
       >
         {/* Slide 1 */}
-        <div className="relative h-[300px] md:h-[800px]">
+        <div className="relative h-[300px] md:h-[600px]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{

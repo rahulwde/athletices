@@ -1,11 +1,65 @@
-import React from 'react';
+import React, {  use, useState } from 'react';
 import { Link } from 'react-router';
 import { FcGoogle } from "react-icons/fc";
 import { IoMdLogIn } from "react-icons/io";
 
 import { StyledWrapper, StyledWrappered } from '../uverse';
+import { AuthContext } from '../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Register = () => {
+  const {createUser,setUser,googleSignIn}= use(AuthContext)
+ 
+  const [error, setError] = useState()
+
+  const handleRegister = e=>{
+    e.preventDefault()
+
+     const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+
+    // Password validation
+    const uppercaseCheck = /[A-Z]/.test(password);
+    const lowercaseCheck = /[a-z]/.test(password);
+    const lengthCheck = password.length >= 6;
+
+    if (!uppercaseCheck) {
+      return setError("Password must contain at least one uppercase letter.");
+    }
+
+    if (!lowercaseCheck) {
+      return setError("Password must contain at least one lowercase letter.");
+    }
+
+    if (!lengthCheck) {
+      return setError("Password must be at least 6 characters long.");
+    }
+     createUser(email,password)
+    .then((res)=>{
+      const user = res.user
+      setUser(user)
+    }).catch((error)=>
+    console.log(error))
+ 
+    console.log({ name, email, photo, password });
+    Swal.fire("Success!", "Registration successful", "success");
+    form.reset();
+  }
+     const handleGoogleLogin = () => {
+    googleSignIn()
+      .then(result => {
+        Swal.fire("Success", "Google Login successful!", "success");
+        
+      
+      })
+      .catch(error => {
+        Swal.fire("Error", error.message, "error");
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4   bg-cover bg-center"
                 style={{
@@ -17,7 +71,7 @@ const Register = () => {
           Register to Swimmer Event
         </h2>
     
-        <form >
+        <form onSubmit={handleRegister} >
          <div className='space-y-4'>
            <div >
             <StyledWrappered className='w-full' >
@@ -45,7 +99,7 @@ const Register = () => {
           <div >
             <StyledWrappered className='w-full my-2' >
           <div className="input-group  ">
-            <input required type="password" name="email"  autoComplete="off" className="input w-full" />
+            <input required type="password" name="password"  autoComplete="off" className="input w-full" />
             <label className="user-label">password</label>
           </div>
         </StyledWrappered>
@@ -53,10 +107,11 @@ const Register = () => {
           </div>
          </div>
           <StyledWrapper>
-          <button className="button w-full">
+          <button  className="button w-full">
             <div className="blob1" />
             <div className="blob2" />
-            <div className="inner flex gap-3 items-center justify-center text-2xl">login <IoMdLogIn  size={25}/>
+            <div className="inner flex gap-3 items-center justify-center text-2xl" type="submit">
+              Register <IoMdLogIn  size={25}/>
     </div>
           </button>
         </StyledWrapper>
@@ -68,7 +123,7 @@ const Register = () => {
           <button className="button w-full">
             <div className="blob1" />
             <div className="blob2" />
-            <div className="inner flex  justify-center items-center gap-3">Continue with <FcGoogle  size={25}/>
+            <div className="inner flex  justify-center items-center gap-3" onClick={handleGoogleLogin}>Continue with <FcGoogle  size={25}/>
     </div>
           </button>
         </StyledWrapper>

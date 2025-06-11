@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Loader = () => {
   return (
     <StyledWrapper>
-      <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
+      <div   aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster ">
         <div className="wheel" />
         <div className="hamster">
           <div className="hamster__body">
@@ -27,12 +27,19 @@ const Loader = () => {
 }
 
 const StyledWrapper = styled.div`
+  height: 100vh; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  background-color: #f9fafb;
   .wheel-and-hamster {
     --dur: 1s;
     position: relative;
     width: 12em;
     height: 12em;
     font-size: 14px;
+    display:flex;
+    align-items: center
   }
 
   .wheel,
