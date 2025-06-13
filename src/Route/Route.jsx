@@ -15,6 +15,7 @@ import Loader from "../components/Loader";
 import MyBooking from "../Dashbord/MyBooking";
 import Events from "../Event/Event";
 import ManageEvent from "../Dashbord/ManageEvent";
+import UpdateEvent from "../Dashbord/UpdateEvent";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,13 @@ export const router = createBrowserRouter([
       {
         path:"manageEvent",
         element:<PrivateRoute><ManageEvent></ManageEvent></PrivateRoute>
+      },{
+        path:"updateEvent/:id",
+         loader: ({ params }) =>
+          fetch(
+            `http://localhost:5000/athletics/${params.id}`
+          ),
+        element:<PrivateRoute><UpdateEvent></UpdateEvent></PrivateRoute>
       },
       {
       path:"athletics/:id",
