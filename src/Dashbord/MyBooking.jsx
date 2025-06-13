@@ -5,6 +5,7 @@ import BookingCard from './BookingCard';
 import { myBookingPromise } from '../api/application';
 import { AuthContext } from '../Context/AuthContext';
 import Loader from '../components/Loader';
+import BookingTable from './BookingTable';
 
 const MyBooking = () => {
   const { user} = use(AuthContext)
@@ -13,8 +14,8 @@ const MyBooking = () => {
     
       <Tabs>
     <TabList>
-      <Tab>Title 1</Tab>
-      <Tab>Title 2</Tab>
+      <Tab> Card</Tab>
+      <Tab>Table</Tab>
     </TabList>
 
     <TabPanel>
@@ -22,7 +23,8 @@ const MyBooking = () => {
 </Suspense>
     </TabPanel>
     <TabPanel>
-      <h2>Any content 2</h2>
+     <Suspense fallback={<Loader></Loader>}>  <BookingTable myBookingPromise={myBookingPromise(user.email)}></BookingTable> 
+</Suspense>
     </TabPanel>
   </Tabs>
     </div>
