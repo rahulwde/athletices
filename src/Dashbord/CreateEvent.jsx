@@ -1,130 +1,138 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { StyledSelect, Submit } from '../uverse';
+import { AuthContext } from '../Context/AuthContext';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const CreateEvent = () => {
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+     data.email = user?.email;
+  data.name = user?.displayName;
+    console.log(data);
+    axios.post("http://localhost:5000/athletics",data)
+    .then(res=>{
+      if(res.data.insertedId){
+        Swal.fire({
+  title: "create event successfully",
+  icon: "success",
+  draggable: true
+});
+      }
+    }).catch(error=>console.log(error))
+  };
+
   return (
-    <div className="max-w-xl mx-auto p-6 my-5  rounded-2xl shadow-lg mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Create New Athletic Event</h2>
-      <form className="space-y-4">
-        {/* Event Name */}
+    <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">Create New Event</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-6 text-amber-800">
+
+        {/* Title */}
         <div>
-          <label className="block text-gray-700 mb-1">Event Name</label>
-          <StyledWrapper>
-            <input
-              type="text"
-              placeholder="Enter event name"
-              className="input"
-            />
-          </StyledWrapper>
+          <Label>Event Title</Label>
+          <Input type="text" name="title" placeholder="e.g. City Sprint Race" required />
         </div>
 
-        {/* Event Type */}
-     <div>
-      <label className="block text-gray-700 mb-1">Event Type</label>
-      <StyledSelect>
-        <option value="">Select type</option>
-        <option>Swimming</option>
-        <option>Sprinting</option>
-        <option>Long Jump</option>
-        <option>High Jump</option>
-        <option>Hurdle Race</option>
-      </StyledSelect>
-    </div>
-
-        {/* Event Date */}
+        {/* Category */}
         <div>
-          <label className="block text-gray-700 mb-1">Event Date</label>
-          <StyledWrapper>
-            <input
-              type="date"
-              className="input"
-            />
-          </StyledWrapper>
+          <Label>Event Type</Label>
+          <Select name="type" required>
+            <option value="">Select type</option>
+            <option>Swimming</option>
+            <option>Sprinting</option>
+            <option>Long Jump</option>
+            <option>High Jump</option>
+            <option>Hurdle Race</option>
+          </Select>
+        </div>
+            <div>
+          <Label>Event Location</Label>
+          <Input type="text" name="location" placeholder="Dhaka" required />
+        </div>
+        {/* Date */}
+        <div>
+          <Label>Event Date</Label>
+          <Input type="date" name="date" required />
         </div>
 
         {/* Description */}
         <div>
-          <label className="block text-gray-700 mb-1">Description</label>
-          <StyledWrapper>
-            <textarea
-              placeholder="Write something about the event..."
-              rows="4"
-              className="input"
-            ></textarea>
-          </StyledWrapper>
+          <Label>Description</Label>
+          <Textarea name="description" rows="4" placeholder="Write a short event description..." required />
         </div>
 
-        {/* Creator Email */}
+        {/* Image */}
         <div>
-          <label className="block text-gray-700 mb-1">Creator Email</label>
-          <StyledWrapper>
-            <input
-              type="email"
-              value="user@example.com"
-              disabled
-              className="input"
-            />
-          </StyledWrapper>
+          <Label>Image URL</Label>
+          <Input type="url" name="image" placeholder="https://example.com/event.jpg" required />
         </div>
 
-        {/* Creator Name */}
+        {/* User Info */}
         <div>
-          <label className="block text-gray-700 mb-1">Creator Name</label>
-          <StyledWrapper>
-            <input
-              type="text"
-              value="John Doe"
-              disabled
-              className="input"
-            />
-          </StyledWrapper>
+          <Label>Creator Email</Label>
+          <Input type="email" name="email" value={user?.email} disabled />
         </div>
 
-        {/* Event Image URL */}
         <div>
-          <label className="block text-gray-700 mb-1">Event Image URL</label>
-          <StyledWrapper>
-            <input
-              type="url"
-              placeholder="https://example.com/image.jpg"
-              className="input"
-            />
-          </StyledWrapper>
+          <Label>Creator Name</Label>
+          <Input type="text" name="creator" value={user?.displayName} disabled />
         </div>
 
-        {/* Submit Button */}
-        <Submit>
-            <button className="button w-full flex justify-center" type='submit'> 
-        <svg className="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" /></svg>
-         Create Event
-      </button>
-        </Submit>
-        
+        {/* Submit */}
+        <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow">
+          Create Event
+        </button>
       </form>
-    </div>
+    </Wrapper>
   );
 };
 
-const StyledWrapper = styled.div`
-  .input {
-    width: 100%;
-    padding: 11px 23px;
-    font-size: 16px;
-    border-radius: 50px;
-    border: 1px solid #353535;
-    background: none;
-    outline: none;
-    color: #979797;
-    box-shadow: rgb(136 136 136 / 17%) 0px -23px 25px 0px inset,
-      rgb(81 81 81 / 23%) 0px -36px 30px 0px inset,
-      rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-      rgba(0, 0, 0, 0.06) 0px 2px 1px,
-      rgba(0, 0, 0, 0.09) 0px 4px 2px,
-      rgba(0, 0, 0, 0.09) 0px 8px 4px,
-      rgba(0, 0, 0, 0.09) 0px 16px 8px,
-      rgba(0, 0, 0, 0.09) 0px 32px 16px;
+export default CreateEvent;
+
+const Wrapper = styled.div`
+  background-color: #f9fafb;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #374151;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  outline: none;
+  font-size: 16px;
+  &:focus {
+    border-color: #2563eb;
   }
 `;
 
-export default CreateEvent;
+const Select = styled.select`
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  font-size: 16px;
+  color: #374151;
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 24px;
+  font-size: 16px;
+  outline: none;
+  resize: vertical;
+`;

@@ -47,10 +47,21 @@ const Navbar = () => {
         user && <> 
         <li>
       <NavLink 
-        to="/myPostedJob" 
+        to="/createEvent" 
         className={({ isActive }) => isActive ? 'active-link' : ''}
       >
-        MyPostedJOb
+        CreateEvent
+      </NavLink>
+      </li>
+        </>}
+      {
+        user && <> 
+        <li>
+      <NavLink 
+        to="/manageEvent" 
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+      >
+        manage
       </NavLink>
       </li>
         </>}

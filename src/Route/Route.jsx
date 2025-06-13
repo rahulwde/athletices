@@ -14,6 +14,7 @@ import EventDetails from "../Event/EventDetails";
 import Loader from "../components/Loader";
 import MyBooking from "../Dashbord/MyBooking";
 import Events from "../Event/Event";
+import ManageEvent from "../Dashbord/ManageEvent";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path:"createEvent",
        element:<PrivateRoute><CreateEvent></CreateEvent></PrivateRoute>
+      },
+      {
+        path:"manageEvent",
+        element:<PrivateRoute><ManageEvent></ManageEvent></PrivateRoute>
       },
       {
       path:"athletics/:id",
