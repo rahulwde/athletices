@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <div className="mt-2">
+    <div className="mt-2 -z-10">
       <Carousel
         autoPlay
         infiniteLoop
@@ -12,18 +12,15 @@ const Banner = () => {
         interval={4000}
       >
         {/* Slide 1 */}
-        <div className="relative h-[300px] md:h-[600px]">
+        <div className="relative h-[300px] md:h-[800px]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://i.ibb.co/TqpFcjc6/swimin1.jpg')`,
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://i.ibb.co/TDs2wpDp/banner3.jpg')`,
             }}
           ></div>
           <div className="relative z-10 flex items-center justify-center h-full text-center text-white">
-            <div className="max-w-md mx-auto bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 rounded-xl shadow-lg p-8 text-center bg-opacity-80">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Swim to Win</h2>
-              <p className="text-lg">Feel the water. Chase your dreams. Compete with pride.</p>
-            </div>
+            
           </div>
         </div>
 

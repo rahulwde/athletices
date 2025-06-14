@@ -4,11 +4,13 @@ import ThemeToggle from './ThemeToggle';
 import { use } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import Swal from 'sweetalert2';
+import { StyledDropDown } from '../uverse';
  
 
 
 const Navbar = () => {
   const { user , logOut} = use(AuthContext)
+  console.log(user)
   const links = [
     <>
     <li>
@@ -31,18 +33,7 @@ const Navbar = () => {
       </li>
         </>
       }
-      {
-        user && <> 
-        <li>
-      <NavLink 
-        to="/myBooking" 
-        className={({ isActive }) => isActive ? 'active-link' : ''}
-      >
-        MyBooking
-      </NavLink>
-      </li>
-        </>
-      }
+     
       {
         user && <> 
         <li>
@@ -54,17 +45,15 @@ const Navbar = () => {
       </NavLink>
       </li>
         </>}
-      {
-        user && <> 
-        <li>
+         <li>
       <NavLink 
-        to="/manageEvent" 
+        to="/about" 
         className={({ isActive }) => isActive ? 'active-link' : ''}
       >
-        manage
+        About
       </NavLink>
       </li>
-        </>}
+     
       {/* } */}
     </>
   ]
@@ -103,12 +92,95 @@ Swal.fire({
        {links}
     </ul>
   </div>
-  <div className="navbar-end">
-   <ThemeToggle></ThemeToggle>
-  </div>{
-    user?<button className='btn btn-ghost ' onClick={handleLogOut}>logout</button>:<div className='flex gap-3'>  <Link to="/login"><button className='btn btn=primary'>Login</button></Link>
+  <div className="navbar-end mx-8">
+
+
+
+<div className='mx-5 z-20'>
+  {
+    user?<StyledDropDown>
+  <label className="popup relative group">
+    <input type="checkbox" />
+    <div tabIndex={0} className="burger">
+      <div className="avatar">
+        <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
+          <img
+            src={user?.photoURL || "https://i.ibb.co/5xnXSnHB/logo2.png"}
+            alt="User Avatar"
+          />
+        </div>
+      </div>
+
+      {/* Hover Display Name */}
+     
+    </div>
+
+   <nav className="popup-window">
+          <legend>Quick Start</legend>
+          <ul>
+            <li>
+              <button>
+                 {
+        user && <> 
+        <li>
+      <NavLink 
+        to="/myBooking" 
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+      >
+        MyBooking
+      </NavLink>
+      </li>
+        </>
+      }
+                
+              </button>
+            </li>
+            <li>
+              <button>
+                
+                 {
+        user && <> 
+        <li>
+      <NavLink 
+        to="/manageEvent" 
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+      >
+        ManageEvent
+      </NavLink>
+      </li>
+        </>}
+              </button>
+            </li>
+            <li>
+              <button>
+                
+                   {
+        user && <> 
+        <li>
+      <NavLink 
+        to="/bookEvent" 
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+      >
+        BookEvent
+      </NavLink>
+      </li>
+        </>}
+              </button>
+            </li>
+            <li>
+             <button className='btn btn-ghost ' onClick={handleLogOut}>logout</button>
+            </li>
+          </ul>
+        </nav>
+  </label>
+</StyledDropDown>:<div className='flex gap-3'>  <Link to="/login"><button className='btn btn=primary'>Login</button></Link>
      <Link to="/register"><button className='btn btn=primary'>Register</button></Link></div>
   }
+</div>
+
+
+   <ThemeToggle></ThemeToggle>
+  </div>
 </div>
   );
 };

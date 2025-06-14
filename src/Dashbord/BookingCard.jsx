@@ -1,64 +1,89 @@
 import axios from 'axios';
 import React, { use, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+// import { useNavigate } from 'react-router-dom';
 
 const BookingCard = ({ myBookingPromise }) => {
   const bookings = use(myBookingPromise);
-   const [book, setBook] = useState([]);
-  
-    useEffect(() => {
-      setBook(bookings);
-    }, [bookings]);
-  
-    const handleCancel = (id) => {
+  const [book, setBook] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setBook(bookings);
+    if (bookings.length === 0) {
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to cancel this booking?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, cancel it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axios.delete(`http://localhost:5000/bookings/${id}`)
-            .then(({ data }) => {
-              if (data.deletedCount > 0) {
-                const updated = book.filter((b) => b._id !== id);
-                setBook(updated);
-                Swal.fire("Deleted!", "Your booking has been cancelled.", "success");
-              }
-            }).catch(() => {
-              Swal.fire('Error!', 'Something went wrong.', 'error');
-            });
-        }
+        icon: 'info',
+        title: 'No Bookings Found',
+        text: 'You have no bookings. Redirecting to events...',
+        timer: 2500,
+        showConfirmButton: false,
+      }).then(() => {
+        navigate('/event');
       });
-    };
+    }
+  }, [bookings, navigate]);
+
+  const handleCancel = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to cancel this booking?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:5000/bookings/${id}`)
+          .then(({ data }) => {
+            if (data.deletedCount > 0) {
+              const updated = book.filter((b) => b._id !== id);
+              setBook(updated);
+              Swal.fire("Deleted!", "Your booking has been cancelled.", "success");
+            }
+          }).catch(() => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          });
+      }
+    });
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 mt-10">
-      {book.map((booking) => (
-        <div
-          key={booking._id}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition p-5"
-        >
-          <img
-            src={booking.image}
-            alt={booking.title}
-            className="w-full h-48 object-cover rounded-lg mb-4"
-          />
-          <div className="space-y-2">
-            <h3 className="text-xl font-bold text-blue-700 dark:text-blue-300">{booking.title}</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">{booking.description?.slice(0, 100)}...</p>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              <p><strong>Type:</strong> {booking.type}</p>
-              <p><strong>Date:</strong> {booking.date}</p>
-              <p><strong>Location:</strong> {booking.location}</p>
-            </div>
-          </div>
-          <button onClick={()=>handleCancel(booking._id)} className='btn btn-outline rounded-xl hover:bg-red-600 text-xl w-full text-center my-3'>Cancel</button>
+    <>
+      {book.length === 0 ? (
+        <div className="text-center text-xl text-gray-600 dark:text-gray-300 mt-10">
+          No bookings found...
         </div>
-      ))}
-    </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 mt-10">
+          {book.map((booking) => (
+            <div
+              key={booking._id}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition p-5"
+            >
+              <img
+                src={booking.image}
+                alt={booking.title}
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold text-blue-700 dark:text-blue-300">{booking.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{booking.description?.slice(0, 100)}...</p>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <p><strong>Type:</strong> {booking.type}</p>
+                  <p><strong>Date:</strong> {booking.date}</p>
+                  <p><strong>Location:</strong> {booking.location}</p>
+                </div>
+              </div>
+              <button onClick={() => handleCancel(booking._id)} className='btn btn-outline bg-amber-100 rounded-xl hover:bg-red-600 text-xl w-full text-center my-3'>
+                Cancel
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

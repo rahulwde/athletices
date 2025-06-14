@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
 import { useLoaderData, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 
 const EventDetails = () => {
+  const [alreadyBooked, setAlreadyBooked] = useState(false);
   const event = useLoaderData();
   const { id } = useParams();
   const { title, type, image, location, date, description } = event;
@@ -13,33 +14,66 @@ const EventDetails = () => {
   const email = user?.email || '';
   const displayName = user?.displayName || '';
 
+useEffect(() => {
+  if (user?.email) {
+    axios
+      .get(`http://localhost:5000/bookings?email=${user.email}`)
+      .then(res => {
+        const isBooked = res.data.some(b => b.eventId === id);
+        setAlreadyBooked(isBooked);
+      })
+      .catch(() => {
+        setAlreadyBooked(false);
+      });
+  }
+}, [id, user?.email]);
+
   // 👉 handle booking
   const handleBooking = async () => {
-    const currentEvent = {
-      eventId: id,
-      title,
-      type,
-      image,
-      location,
-      date,
-      description,
-      user_email: email,
-      user_name: displayName,
-    };
+  if (alreadyBooked) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Already Booked',
+      text: 'You have already booked this event.',
+    });
+    return;
+  }
 
-    try {
-      const res = await axios.post('http://localhost:5000/bookings', currentEvent);
-      if (res.data) {
-Swal.fire({
-  title: "Booking successful",
-  icon: "success",
-  draggable: true
-});      }  
-    } catch (err) {
-      console.error('Booking error:', err);
-      
-    }
+  const currentEvent = {
+    eventId: id,
+    title,
+    type,
+    image,
+    location,
+    date,
+    description,
+    user_email: email,
+    user_name: displayName,
   };
+
+  try {
+    const res = await axios.post('http://localhost:5000/bookings', currentEvent);
+    if (res.data?.insertedId) {
+      Swal.fire({
+        title: "Booking successful",
+        icon: "success",
+      });
+      setAlreadyBooked(true); // update UI immediately
+    }
+  } catch (err) {
+    if (err.response?.status === 409) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Duplicate Booking',
+        text: 'You have already booked this event.',
+      });
+    } else {
+      console.error('Booking error:', err);
+      Swal.fire('Error', 'Something went wrong. Try again.', 'error');
+    }
+  }
+};
+
 
   return (
     <div className="max-w-6xl mx-auto my-8 px-4">

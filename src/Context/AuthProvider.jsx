@@ -34,7 +34,8 @@ const logOut = ()=>{
   setUser,
   googleSignIn,
   signIn,
-  logOut
+  logOut,
+  loading
 
  }
 
