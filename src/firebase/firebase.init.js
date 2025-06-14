@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC0lh_0i3Gr4TWEyow_4wmOvUogBdjQyNk",
-  authDomain: "athletice-auth.firebaseapp.com",
-  projectId: "athletice-auth",
-  storageBucket: "athletice-auth.firebasestorage.app",
-  messagingSenderId: "820576591958",
-  appId: "1:820576591958:web:9cbb6add43b2c68665dbf7"
+ apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase

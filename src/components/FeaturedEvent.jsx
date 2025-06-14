@@ -4,9 +4,8 @@ import EventCard from '../Event/EventCard';
 
 const FeaturedEvent = ({ athleticPromise }) => {
   const atletics = use(athleticPromise);
-  const [showAll, setShowAll] = useState(false); // 👉 Toggle state
+  const [showAll, setShowAll] = useState(false); 
 
-  // 👉 যদি showAll false থাকে, তাহলে ৬টা ইভেন্ট দেখাবে
   const displayedEvents = showAll ? atletics : atletics.slice(0, 6);
 
   return (

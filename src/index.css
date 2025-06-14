@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+ 
+.active-link {
+  color: #2563eb; /* Tailwind's blue-600 */
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

@@ -9,6 +9,7 @@ import BookingTable from './BookingTable';
 
 const MyBooking = () => {
   const { user} = use(AuthContext)
+  console.log(user.accessToken)
   return (
     <div>
     
@@ -19,11 +20,11 @@ const MyBooking = () => {
     </TabList>
 
     <TabPanel>
-<Suspense fallback={<Loader></Loader>}>  <BookingCard myBookingPromise={myBookingPromise(user.email)}></BookingCard>
+<Suspense fallback={<Loader></Loader>}>  <BookingCard myBookingPromise={myBookingPromise(user.email,user.accessToken)}></BookingCard>
 </Suspense>
     </TabPanel>
     <TabPanel>
-     <Suspense fallback={<Loader></Loader>}>  <BookingTable myBookingPromise={myBookingPromise(user.email)}></BookingTable> 
+     <Suspense fallback={<Loader></Loader>}>  <BookingTable myBookingPromise={myBookingPromise(user.email , user.accessToken)}></BookingTable> 
 </Suspense>
     </TabPanel>
   </Tabs>
