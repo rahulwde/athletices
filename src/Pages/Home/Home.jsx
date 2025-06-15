@@ -6,7 +6,7 @@ import FeaturedEvent from '../../components/FeaturedEvent';
 import Loader from '../../components/Loader';
 
 const Home = () => {
-  const athleticPromise = fetch("http://localhost:5000/athletics").then(res=>res.json())
+  const athleticPromise = fetch("http://localhost:5000/athletics/public/get").then(res=>res.json())
   return (
     <div>
       <Banner></Banner>

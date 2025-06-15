@@ -10,7 +10,7 @@ const Events = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    fetch('http://localhost:5000/athletics')
+    fetch('http://localhost:5000/athletics/public/get')
       .then(res => res.json())
       .then(data => {
         // Clean data to avoid undefined properties

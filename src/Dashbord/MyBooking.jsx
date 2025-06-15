@@ -2,14 +2,14 @@ import React, { Suspense, use } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import BookingCard from './BookingCard';
-import { myBookingPromise } from '../api/application';
 import { AuthContext } from '../Context/AuthContext';
 import Loader from '../components/Loader';
 import BookingTable from './BookingTable';
+import useJobApi from '../api/useJobApi';
 
 const MyBooking = () => {
   const { user} = use(AuthContext)
-  console.log(user.accessToken)
+ const {myBookingPromise}= useJobApi()
   return (
     <div>
     
@@ -20,11 +20,11 @@ const MyBooking = () => {
     </TabList>
 
     <TabPanel>
-<Suspense fallback={<Loader></Loader>}>  <BookingCard myBookingPromise={myBookingPromise(user.email,user.accessToken)}></BookingCard>
+<Suspense fallback={<Loader></Loader>}>  <BookingCard myBookingPromise={myBookingPromise(user.email)}></BookingCard>
 </Suspense>
     </TabPanel>
     <TabPanel>
-     <Suspense fallback={<Loader></Loader>}>  <BookingTable myBookingPromise={myBookingPromise(user.email , user.accessToken)}></BookingTable> 
+     <Suspense fallback={<Loader></Loader>}>  <BookingTable myBookingPromise={myBookingPromise(user.email)}></BookingTable> 
 </Suspense>
     </TabPanel>
   </Tabs>
