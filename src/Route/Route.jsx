@@ -1,7 +1,4 @@
- import {
-  createBrowserRouter,
- 
-} from "react-router";
+import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layoute/MainLayout";
 import Home from "../Pages/Home/Home";
 import Login from "../Auth/Login";
@@ -23,56 +20,83 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement:<ErrorElement></ErrorElement>,
-    children:[
+    errorElement: <ErrorElement></ErrorElement>,
+    children: [
       {
-        index:true, Component:Home
+        index: true,
+        Component: Home,
       },
-     
+
       {
-        path:"createEvent",
-       element:<PrivateRoute><CreateEvent></CreateEvent></PrivateRoute>
-      },
-      {
-        path:"manageEvent",
-        element:<PrivateRoute><ManageEvent></ManageEvent></PrivateRoute>
-      },{
-        path:"updateEvent/:id",
-         loader: ({ params }) =>
-          fetch(
-            `http://localhost:5000/athletics/${params.id}`
-          ),
-          hydrateFallbackElement:<Loader></Loader>,
-        element:<PrivateRoute><UpdateEvent></UpdateEvent></PrivateRoute>
-      },{
-        path:"bookEvent",
-        element:<PrivateRoute><BookEvent></BookEvent></PrivateRoute>
+        path: "createEvent",
+        element: (
+          <PrivateRoute>
+            <CreateEvent></CreateEvent>
+          </PrivateRoute>
+        ),
       },
       {
-      path:"athletics/:id",
-      element:<PrivateRoute><EventDetails></EventDetails></PrivateRoute>,
-      loader:({params})=>fetch(`http://localhost:5000/athletics/${params.id}`),
-      hydrateFallbackElement:<Loader></Loader>
-      },{
-        path:"event",
-        element: <Events></Events> 
+        path: "manageEvent",
+        element: (
+          <PrivateRoute>
+            <ManageEvent></ManageEvent>
+          </PrivateRoute>
+        ),
       },
       {
-        path:"myBooking",
-        element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+        path: "updateEvent/:id",
+        loader: ({ params }) =>
+          fetch(`https://athletics-server.vercel.app/athletics/${params.id}`),
+        hydrateFallbackElement: <Loader></Loader>,
+        element: (
+          <PrivateRoute>
+            <UpdateEvent></UpdateEvent>
+          </PrivateRoute>
+        ),
       },
       {
-        path:"about",
-        element:<About></About>
+        path: "bookEvent",
+        element: (
+          <PrivateRoute>
+            <BookEvent></BookEvent>
+          </PrivateRoute>
+        ),
       },
       {
-        path:"login",
-        element:<Login></Login>
+        path: "athletics/:id",
+        element: (
+          <PrivateRoute>
+            <EventDetails></EventDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://athletics-server.vercel.app/athletics/${params.id}`),
+        hydrateFallbackElement: <Loader></Loader>,
       },
       {
-        path:"register",
-        element:<Register></Register>
-      }
-    ]
+        path: "event",
+        element: <Events></Events>,
+      },
+      {
+        path: "myBooking",
+        element: (
+          <PrivateRoute>
+            <MyBooking></MyBooking>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "about",
+        element: <About></About>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
+      },
+    ],
   },
 ]);

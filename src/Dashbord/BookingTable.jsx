@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { use, useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import React, { use, useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 const BookingTable = ({ myBookingPromise }) => {
   const bookings = use(myBookingPromise);
@@ -12,24 +12,30 @@ const BookingTable = ({ myBookingPromise }) => {
 
   const handleCancel = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You want to cancel this booking?",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, cancel it!'
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/bookings/${id}`)
+        axios
+          .delete(`https://athletics-server.vercel.app/bookings/${id}`)
           .then(({ data }) => {
             if (data.deletedCount > 0) {
               const updated = book.filter((b) => b._id !== id);
               setBook(updated);
-              Swal.fire("Deleted!", "Your booking has been cancelled.", "success");
+              Swal.fire(
+                "Deleted!",
+                "Your booking has been cancelled.",
+                "success"
+              );
             }
-          }).catch(() => {
-            Swal.fire('Error!', 'Something went wrong.', 'error');
+          })
+          .catch(() => {
+            Swal.fire("Error!", "Something went wrong.", "error");
           });
       }
     });
@@ -38,7 +44,9 @@ const BookingTable = ({ myBookingPromise }) => {
   return (
     <div className="overflow-x-auto mt-8 p-4 max-w-6xl mx-auto">
       <title>Athletics | BookingTable</title>
-      <h2 className="text-2xl font-bold text-center mb-6 text-blue-700 dark:text-blue-300">My Bookings</h2>
+      <h2 className="text-2xl font-bold text-center mb-6 text-blue-700 dark:text-blue-300">
+        My Bookings
+      </h2>
       <table className="min-w-full text-sm text-left border  shadow-md rounded-xl overflow-hidden">
         <thead className="bg-rose-300 dark:bg-rose-800 text-white uppercase text-sm">
           <tr>
@@ -68,7 +76,10 @@ const BookingTable = ({ myBookingPromise }) => {
           ))}
           {book.length === 0 && (
             <tr>
-              <td colSpan="5" className="text-center py-6 text-gray-500 dark:text-gray-400">
+              <td
+                colSpan="5"
+                className="text-center py-6 text-gray-500 dark:text-gray-400"
+              >
                 No bookings available.
               </td>
             </tr>

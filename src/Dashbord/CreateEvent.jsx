@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { AuthContext } from '../Context/AuthContext';
-import axios from 'axios';
-import Swal from 'sweetalert2';
- 
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+
 const CreateEvent = () => {
   const { user } = useContext(AuthContext);
 
@@ -12,34 +12,41 @@ const CreateEvent = () => {
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-     data.email = user?.email;
-  data.name = user?.displayName;
+    data.email = user?.email;
+    data.name = user?.displayName;
     console.log(data);
-    axios.post("http://localhost:5000/athletics",data)
-    .then(res=>{
-      if(res.data.insertedId){
-        Swal.fire({
-  title: "create event successfully",
-  icon: "success",
-  draggable: true
-});
-      }
-    }).catch(error=>console.log(error))
+    axios
+      .post("https://athletics-server.vercel.app/athletics", data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "create event successfully",
+            icon: "success",
+            draggable: true,
+          });
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
-      
-              <title>CreateEvent - Athletics</title>
-              
-      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">Create New Event</h2>
+      <title>CreateEvent - Athletics</title>
+
+      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">
+        Create New Event
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6 text-amber-800">
-
         {/* Title */}
         <div>
           <Label>Event Title</Label>
-          <Input type="text" name="title" placeholder="e.g. City Sprint Race" required />
+          <Input
+            type="text"
+            name="title"
+            placeholder="e.g. City Sprint Race"
+            required
+          />
         </div>
 
         {/* Category */}
@@ -54,7 +61,7 @@ const CreateEvent = () => {
             <option>Hurdle Race</option>
           </Select>
         </div>
-            <div>
+        <div>
           <Label>Event Location</Label>
           <Input type="text" name="location" placeholder="Dhaka" required />
         </div>
@@ -67,13 +74,23 @@ const CreateEvent = () => {
         {/* Description */}
         <div>
           <Label>Description</Label>
-          <Textarea name="description" rows="4" placeholder="Write a short event description..." required />
+          <Textarea
+            name="description"
+            rows="4"
+            placeholder="Write a short event description..."
+            required
+          />
         </div>
 
         {/* Image */}
         <div>
           <Label>Image URL</Label>
-          <Input type="url" name="image" placeholder="https://example.com/event.jpg" required />
+          <Input
+            type="url"
+            name="image"
+            placeholder="https://example.com/event.jpg"
+            required
+          />
         </div>
 
         {/* User Info */}
@@ -84,11 +101,19 @@ const CreateEvent = () => {
 
         <div>
           <Label>Creator Name</Label>
-          <Input type="text" name="creator" value={user?.displayName} disabled />
+          <Input
+            type="text"
+            name="creator"
+            value={user?.displayName}
+            disabled
+          />
         </div>
 
         {/* Submit */}
-        <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow">
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow"
+        >
           Create Event
         </button>
       </form>

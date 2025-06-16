@@ -1,30 +1,27 @@
-import React, { use } from 'react';
+import React, { use } from "react";
 // import { useNavigate } from 'react-router';
-import styled from 'styled-components';
-import Swal from 'sweetalert2';
-import { AuthContext } from '../Context/AuthContext';
-import { useLoaderData, useNavigate } from 'react-router';
-import { Helmet } from 'react-helmet-async';
+import styled from "styled-components";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Context/AuthContext";
+import { useLoaderData, useNavigate } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const UpdateEvent = () => {
-  const {title , date , type , image , description , _id} = useLoaderData()
-  const {user}= use(AuthContext)
-  const navigate = useNavigate()
+  const { title, date, type, image, description, _id } = useLoaderData();
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const taskData = Object.fromEntries(formData.entries());
-    fetch(
-      `http://localhost:5000/athletics/${_id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(taskData),
-      }
-    )
+    fetch(`https://athletics-server.vercel.app/athletics/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(taskData),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -56,19 +53,29 @@ const UpdateEvent = () => {
       });
   };
   return (
-     <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
-       <Helmet>
-              <title>updateEvent - Athletics</title>
-              <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
-            </Helmet>
-      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">Event</h2>
+    <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
+      <Helmet>
+        <title>updateEvent - Athletics</title>
+        <meta
+          name="description"
+          content="Browse and post freelance tasks on TaskMarket."
+        />
+      </Helmet>
+      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">
+        Event
+      </h2>
 
-      <form  onSubmit={handleUpdate} className="space-y-6 text-amber-800">
-
+      <form onSubmit={handleUpdate} className="space-y-6 text-amber-800">
         {/* Title */}
         <div>
           <Label>Event Title</Label>
-          <Input type="text" defaultValue={title} name="title" placeholder="e.g. City Sprint Race" required />
+          <Input
+            type="text"
+            defaultValue={title}
+            name="title"
+            placeholder="e.g. City Sprint Race"
+            required
+          />
         </div>
 
         {/* Category */}
@@ -83,26 +90,44 @@ const UpdateEvent = () => {
             <option>Hurdle Race</option>
           </Select>
         </div>
-            <div>
+        <div>
           <Label>Event Location</Label>
-          <Input type="text" defaultValue={location} name="location" placeholder="Dhaka" required />
+          <Input
+            type="text"
+            defaultValue={location}
+            name="location"
+            placeholder="Dhaka"
+            required
+          />
         </div>
         {/* Date */}
         <div>
           <Label>Event Date</Label>
-          <Input type="date" defaultValue={ date} name="date" required />
+          <Input type="date" defaultValue={date} name="date" required />
         </div>
 
         {/* Description */}
         <div>
           <Label>Description</Label>
-          <Textarea name="description" defaultValue={description} rows="4" placeholder="Write a short event description..." required />
+          <Textarea
+            name="description"
+            defaultValue={description}
+            rows="4"
+            placeholder="Write a short event description..."
+            required
+          />
         </div>
 
         {/* Image */}
         <div>
           <Label>Image URL</Label>
-          <Input type="url" name="image" defaultValue={image} placeholder="https://example.com/event.jpg" required />
+          <Input
+            type="url"
+            name="image"
+            defaultValue={image}
+            placeholder="https://example.com/event.jpg"
+            required
+          />
         </div>
 
         {/* User Info */}
@@ -113,11 +138,19 @@ const UpdateEvent = () => {
 
         <div>
           <Label>Creator Name</Label>
-          <Input type="text" name="creator" value={user?.displayName} disabled />
+          <Input
+            type="text"
+            name="creator"
+            value={user?.displayName}
+            disabled
+          />
         </div>
 
         {/* Submit */}
-        <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow">
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow"
+        >
           Create Event
         </button>
       </form>
@@ -165,6 +198,5 @@ const Textarea = styled.textarea`
   outline: none;
   resize: vertical;
 `;
-
 
 export default UpdateEvent;
