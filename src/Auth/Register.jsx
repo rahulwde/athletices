@@ -6,6 +6,8 @@ import { IoMdLogIn } from "react-icons/io";
 import { StyledWrapper, StyledWrappered } from '../uverse';
 import { AuthContext } from '../Context/AuthContext';
 import Swal from 'sweetalert2';
+import register from '../assets/register- 1750053248908.json'
+import Lottie from 'lottie-react';
 
 const Register = () => {
   const {createUser,setUser,googleSignIn}= use(AuthContext)
@@ -61,13 +63,21 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4   bg-cover bg-center"
-                style={{
-                  backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.ibb.co/JRdnTMrz/swim2.jpg')`,
-                }}>
+    <div className="min-h-screen flex items-center justify-center px-4   bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500"
+              >
         
-      <div className="w-full max-w-md bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
+      <div className="justify-center items-center bg-white md:flex gap-10 h-3/4 dark:bg-gray-900 shadow-lg rounded-2xl lg:px-20 p-4">
+           <div className="space-y-2.5">
+                <Lottie
+                  animationData={register}
+                  loop={true}
+                  style={{ height: 300, width: 300 }}
+                />
+              
+              </div>
+
+      <div>
+          <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
           Register to Swimmer Event
         </h2>
     
@@ -134,6 +144,7 @@ const Register = () => {
             Login
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

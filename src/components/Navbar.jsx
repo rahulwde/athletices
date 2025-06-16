@@ -10,11 +10,7 @@ import { StyledDropDown } from '../uverse';
 
 const Navbar = () => {
   const { user , logOut} = use(AuthContext)
-  // console.log(user)
-   const navLinkStyle = ({ isActive }) =>
-    isActive
-      ? "relative text-blue-600 font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-blue-600 transition-all"
-      : "text-gray-700 hover:text-blue-500 transition";
+  
   const links = [
     <>
     <li>

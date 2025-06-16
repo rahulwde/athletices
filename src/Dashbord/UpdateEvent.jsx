@@ -56,6 +56,10 @@ const UpdateEvent = () => {
   };
   return (
      <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
+       <Helmet>
+              <title>updateEvent - Athletics</title>
+              <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
+            </Helmet>
       <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">Event</h2>
 
       <form  onSubmit={handleUpdate} className="space-y-6 text-amber-800">

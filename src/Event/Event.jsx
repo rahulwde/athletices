@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EventCard from './EventCard';
 import { StyledSearch, StyledWrapper } from '../uverse';
 import { IoMdLogIn } from 'react-icons/io';
+import { Helmet } from 'react-helmet-async';
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -38,6 +39,10 @@ const Events = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
+       <Helmet>
+              <title>All-Event - Athletics</title>
+              <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
+            </Helmet>
       <h1 className="text-3xl font-bold my-6">All Events</h1>
 
       <div className="flex">

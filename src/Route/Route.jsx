@@ -41,6 +41,7 @@ export const router = createBrowserRouter([
           fetch(
             `http://localhost:5000/athletics/${params.id}`
           ),
+          hydrateFallbackElement:<Loader></Loader>,
         element:<PrivateRoute><UpdateEvent></UpdateEvent></PrivateRoute>
       },
       {

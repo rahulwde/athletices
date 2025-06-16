@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const CreateEvent = () => {
   const { user } = useContext(AuthContext);
@@ -29,6 +30,10 @@ const CreateEvent = () => {
 
   return (
     <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
+       <Helmet>
+              <title>CreateEvent - Athletics</title>
+              <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
+            </Helmet>
       <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">Create New Event</h2>
 
       <form onSubmit={handleSubmit} className="space-y-6 text-amber-800">

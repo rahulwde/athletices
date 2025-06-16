@@ -1,8 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
+       <Helmet>
+        <title>About - Athletics</title>
+        <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
+      </Helmet>
       <h1 className="text-4xl font-bold text-center text-blue-700">About Event Explorer</h1>
       
       <p className="text-lg  text-justify">

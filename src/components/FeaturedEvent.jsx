@@ -1,12 +1,11 @@
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import { motion } from "framer-motion";
 import EventCard from '../Event/EventCard';
+import { Link } from 'react-router';
 
 const FeaturedEvent = ({ athleticPromise }) => {
   const atletics = use(athleticPromise);
-  const [showAll, setShowAll] = useState(false); 
-
-  const displayedEvents = showAll ? atletics : atletics.slice(0, 6);
+   
 
   return (
     <div className='max-w-7xl mx-auto px-4'>
@@ -23,22 +22,13 @@ const FeaturedEvent = ({ athleticPromise }) => {
 
         <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 place-items-center gap-6'>
           {
-            displayedEvents.map(athletic => (
+            atletics.slice(0,6).map(athletic => (
               <EventCard key={athletic._id} athletic={athletic} />
             ))
           }
         </div>
 
-        {
-          !showAll && atletics.length > 6 && (
-            <button
-              onClick={() => setShowAll(true)}
-              className='mt-8 btn btn-outline text-blue-700 hover:bg-blue-700 hover:text-white px-8 rounded-xl transition'
-            >
-              See All Events
-            </button>
-          )
-        }
+      <Link to="/event"> <button   className="btn btn-primary px-4 my-4 text-white font-bold">See All</button></Link>
       </div>
     </div>
   );
