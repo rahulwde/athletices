@@ -51,7 +51,7 @@ const Login = () => {
   return (
       <div className="min-h-screen flex items-center justify-center px-4  bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500"
              >
-                
+                <title>Athletics - logIn</title>
     
   <div className="justify-center items-center bg-white md:flex gap-10 h-3/4 dark:bg-gray-900 shadow-lg rounded-2xl lg:px-20 p-4">
     <div className="space-y-2.5">

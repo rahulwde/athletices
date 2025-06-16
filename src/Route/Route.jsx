@@ -17,6 +17,7 @@ import Events from "../Event/Event";
 import ManageEvent from "../Dashbord/ManageEvent";
 import UpdateEvent from "../Dashbord/UpdateEvent";
 import About from "../Pages/About";
+import BookEvent from "../Event/BookEvent";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,9 @@ export const router = createBrowserRouter([
           ),
           hydrateFallbackElement:<Loader></Loader>,
         element:<PrivateRoute><UpdateEvent></UpdateEvent></PrivateRoute>
+      },{
+        path:"bookEvent",
+        element:<PrivateRoute><BookEvent></BookEvent></PrivateRoute>
       },
       {
       path:"athletics/:id",
@@ -51,7 +55,7 @@ export const router = createBrowserRouter([
       hydrateFallbackElement:<Loader></Loader>
       },{
         path:"event",
-        element:<PrivateRoute><Events></Events></PrivateRoute>
+        element: <Events></Events> 
       },
       {
         path:"myBooking",

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthContext';
 import { useLoaderData, useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateEvent = () => {
   const {title , date , type , image , description , _id} = useLoaderData()

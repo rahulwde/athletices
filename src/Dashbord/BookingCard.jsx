@@ -51,6 +51,7 @@ const BookingCard = ({ myBookingPromise }) => {
 
   return (
     <>
+    <title>Athletics | BookingCard</title>
       {book.length === 0 ? (
         <div className="text-center text-xl text-gray-600 dark:text-gray-300 mt-10">
           No bookings found...

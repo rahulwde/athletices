@@ -6,17 +6,16 @@ import { AuthContext } from '../Context/AuthContext';
 import Loader from '../components/Loader';
 import BookingTable from './BookingTable';
 import useJobApi from '../api/useJobApi';
-import { Helmet } from 'react-helmet-async';
+ 
 
 const MyBooking = () => {
   const { user} = use(AuthContext)
  const {myBookingPromise}= useJobApi()
   return (
     <div>
-     <Helmet>
+    
             <title>MyBooking - Athletics</title>
-            <meta name="description" content="Browse and post freelance tasks on TaskMarket." />
-          </Helmet>
+             
       <Tabs>
     <TabList>
       <Tab> Card</Tab>

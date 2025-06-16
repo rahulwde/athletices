@@ -21,8 +21,7 @@ const Navbar = () => {
         Home
       </NavLink>
       </li>
-      {
-        user && <> 
+  
         <li>
       <NavLink 
         to="/event" 
@@ -30,12 +29,8 @@ const Navbar = () => {
       >
          Event
       </NavLink>
-      </li>
-        </>
-      }
-     
-      {
-        user && <> 
+      </li> 
+       
         <li>
       <NavLink 
         to="/createEvent" 
@@ -44,7 +39,7 @@ const Navbar = () => {
         CreateEvent
       </NavLink>
       </li>
-        </>}
+        
          <li>
       <NavLink 
         to="/about" 
@@ -99,24 +94,26 @@ Swal.fire({
 <div className='mx-5 z-20'>
   {
     user?<StyledDropDown>
+      <div className='tooltip tooltip-bottom ' data-tip={user?user.displayName:"user"}>
+
   <label className="popup relative group">
     <input type="checkbox" />
     <div tabIndex={0} className="burger">
-      <div className="avatar">
-        <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
-          <img
-            src={user?.photoURL || "https://i.ibb.co/5xnXSnHB/logo2.png"}
-            alt="User Avatar"
-          />
-        </div>
-      </div>
+      
+  <img
+    src={user?.photoURL || "https://i.ibb.co/5xnXSnHB/logo2.png"}
+    alt="User Avatar"
+    className="w-24 rounded-full ring-2 ring-primary"
+  />
+ 
 
-      {/* Hover Display Name */}
      
     </div>
 
+   
+
    <nav className="popup-window">
-          <legend>Quick Start</legend>
+          <legend>Hi!  {user.displayName}</legend>
           <ul>
             <li>
               <button>
@@ -173,6 +170,7 @@ Swal.fire({
           </ul>
         </nav>
   </label>
+      </div>
 </StyledDropDown>:<div className='flex gap-3'>  <Link to="/login"><button className='btn btn=primary'>Login</button></Link>
      <Link to="/register"><button className='btn btn=primary'>Register</button></Link></div>
   }

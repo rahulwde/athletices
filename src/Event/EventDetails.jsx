@@ -17,7 +17,11 @@ const EventDetails = () => {
 useEffect(() => {
   if (user?.email) {
     axios
-      .get(`http://localhost:5000/bookings?email=${user.email}`)
+      .get(`http://localhost:5000/bookings?email=${user.email}`,{
+        headers:{
+          authorization :`Bearer ${user.accessToken}`
+        }
+      })
       .then(res => {
         const isBooked = res.data.some(b => b.eventId === id);
         setAlreadyBooked(isBooked);
@@ -58,7 +62,7 @@ useEffect(() => {
         title: "Booking successful",
         icon: "success",
       });
-      setAlreadyBooked(true); // update UI immediately
+      setAlreadyBooked(true);  
     }
   } catch (err) {
     if (err.response?.status === 409) {
@@ -77,6 +81,7 @@ useEffect(() => {
 
   return (
     <div className="max-w-6xl mx-auto my-8 px-4">
+      <title>Athletics | EventDetails</title>
       {/* Event Image */}
       <div className="w-full max-h-[600px] overflow-hidden rounded-3xl shadow-lg">
         <img className="w-full h-[600px] object-cover object-center" src={image} alt={title} />
