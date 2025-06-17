@@ -14,7 +14,7 @@ const CreateEvent = () => {
     const data = Object.fromEntries(formData.entries());
     data.email = user?.email;
     data.name = user?.displayName;
-    console.log(data);
+   
     axios
       .post("https://athletics-server.vercel.app/athletics", data)
       .then((res) => {
@@ -23,7 +23,9 @@ const CreateEvent = () => {
             title: "create event successfully",
             icon: "success",
             draggable: true,
+
           });
+          
         }
       })
       .catch((error) => console.log(error));
