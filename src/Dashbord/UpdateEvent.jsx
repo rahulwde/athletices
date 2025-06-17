@@ -62,7 +62,7 @@ const UpdateEvent = () => {
         />
       </Helmet>
       <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">
-        Event
+     Update your  Event
       </h2>
 
       <form onSubmit={handleUpdate} className="space-y-6 text-amber-800">
@@ -151,7 +151,7 @@ const UpdateEvent = () => {
           type="submit"
           className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow"
         >
-          Create Event
+          Update Event
         </button>
       </form>
     </Wrapper>
