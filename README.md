@@ -1,12 +1,41 @@
-# React + Vite
+## 🔗 Live Links
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [Live Website](https://athletice-auth.web.app/)
+ 
+## 📋 Project Overview
 
-Currently, two official plugins are available:
+AthleticHub is a full-stack platform for athletes to discover, book, and manage local sports events. Users can:
+- View event details
+- Book events (only if logged in)
+- Manage their bookings
+- Organizers can create, update, delete their events
+## 💡 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Firebase Authentication (Email/Google)
+- JWT Protected Private Routes
+- Responsive UI (Mobile + Desktop)
+- Event Create, Update, Delete
+- Book Event functionality
+- My Bookings Page with delete option
+- Manage Events Page for organizers
+- Event Search by Name or Location
+- Layout toggle (Card/Table view)
+- Custom 404 page
+- Dynamic Title per page
+- Toast Notifications & Loading Spinners
+## 🧪 Technologies Used
 
-## Expanding the ESLint configuration
+### 🔧 Frontend:
+- React.js
+- React Router DOM
+- Tailwind CSS + DaisyUI
+- Framer Motion
+- Axios
+- Firebase
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🛠 Backend:
+- Node.js
+- Express.js
+- MongoDB
+- JWT
+- dotenv
