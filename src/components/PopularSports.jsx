@@ -23,14 +23,14 @@ const sportsData = [
 
 const SportsCard = ({ sport, delay }) => (
   <motion.div
-    className="bg-gradient-to-b from-white to-gray-50 p-6 rounded-2xl shadow hover:shadow-2xl transition-transform transform hover:scale-105"
+    className="bg-base-200 p-6 rounded-2xl shadow hover:shadow-2xl transition-transform transform hover:scale-105"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
     viewport={{ once: true }}
   >
     <div className="flex items-center justify-center mb-4">{sport.icon}</div>
-    <h4 className="text-lg font-semibold text-gray-800">{sport.name}</h4>
+    <h4 className="text-lg font-semibold text-base-content">{sport.name}</h4>
   </motion.div>
 );
 
@@ -39,7 +39,7 @@ const PopularSports = () => {
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <motion.h2
-          className="text-4xl font-bold text-blue-700 mb-12"
+          className="text-4xl font-bold text-[#f95f35] mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

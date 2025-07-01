@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import EventCard from "./EventCard";
 import { StyledSearch, StyledWrapper } from "../uverse";
-import { IoMdLogIn } from "react-icons/io";
 import { Helmet } from "react-helmet-async";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc"); // "asc" or "desc"
 
   // Fetch events from backend
   useEffect(() => {
     fetch("https://athletics-server.vercel.app/athletics/public/get")
       .then((res) => res.json())
       .then((data) => {
-        // Clean data to avoid undefined properties
         const cleaned = data.map((ev) => ({
           title: ev.title || "",
           location: ev.location || "",
@@ -26,32 +25,47 @@ const Events = () => {
       });
   }, []);
 
-  // Filter events based on search input
+  // Filter and sort events
   useEffect(() => {
     const query = searchQuery.toLowerCase();
-    const filtered = events.filter(
+    let filtered = events.filter(
       (event) =>
         event?.title?.toLowerCase().includes(query) ||
         event?.location?.toLowerCase().includes(query) ||
         event?.type?.toLowerCase().includes(query)
     );
+
+    // Apply sorting
+    filtered = filtered.sort((a, b) => {
+      const titleA = a.title.toLowerCase();
+      const titleB = b.title.toLowerCase();
+      return sortOrder === "asc"
+        ? titleA.localeCompare(titleB)
+        : titleB.localeCompare(titleA);
+    });
+
     setFilteredEvents(filtered);
-  }, [searchQuery, events]);
+  }, [searchQuery, events, sortOrder]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
       <Helmet>
-        <title>All-Event - Athletics</title>
+        <title>All Events - Athletics</title>
         <meta
           name="description"
-          content="Browse and post freelance tasks on TaskMarket."
+          content="Browse and discover all athletic events around you."
         />
       </Helmet>
-      <h1 className="text-3xl font-bold my-6">All Events</h1>
 
-      <div className="flex">
+      <h1 className="text-3xl font-bold my-6 text-primary dark:text-[#ecfeff]">
+        All Events
+      </h1>
+
+      {/* Search and Sort Section */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {/* Search Input */}
         <StyledSearch>
-          <form className="form my-5" onSubmit={(e) => e.preventDefault()}>
+          <form className="form my-2" onSubmit={(e) => e.preventDefault()}>
             <button type="submit">
               <svg
                 width={17}
@@ -73,7 +87,6 @@ const Events = () => {
             <input
               className="input"
               placeholder="Search your Event"
-              required
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -101,21 +114,33 @@ const Events = () => {
           </form>
         </StyledSearch>
 
-        <StyledWrapper>
-          <button className="button">
-            <div className="blob1" />
-            <div className="blob2" />
-            <div className="inner flex gap-3 items-center justify-center text-2xl">
-              Search
-            </div>
-          </button>
-        </StyledWrapper>
+        {/* Sort Dropdown */}
+        <div className="flex items-center gap-3">
+          <label className="text-sm font-medium text-base">
+            Sort by Title:
+          </label>
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="select select-bordered text-sm bg-base-100   text-base-content"
+          >
+            <option value="asc">Ascending (A-Z)</option>
+            <option value="desc">Descending (Z-A)</option>
+          </select>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredEvents.map((athletic) => (
-          <EventCard athletic={athletic} key={athletic._id} />
-        ))}
+      {/* All Event Cards */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {filteredEvents.length ? (
+          filteredEvents.map((athletic) => (
+            <EventCard athletic={athletic} key={athletic._id} />
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-400 mt-6">
+            No events found for "{searchQuery}"
+          </p>
+        )}
       </div>
     </div>
   );

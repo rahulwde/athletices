@@ -59,7 +59,7 @@ const BookingCard = ({ myBookingPromise }) => {
     <>
       <title>Athletics | BookingCard</title>
       {book.length === 0 ? (
-        <div className="text-center text-xl text-gray-600 dark:text-gray-300 mt-10">
+        <div className="text-center text-xl min-h-100vh text-gray-600 dark:text-gray-300 mt-10">
           No bookings found...
         </div>
       ) : (
@@ -67,7 +67,7 @@ const BookingCard = ({ myBookingPromise }) => {
           {book.map((booking) => (
             <div
               key={booking._id}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition p-5"
+              className="bg-base-300 rounded-xl shadow hover:shadow-lg transition p-5"
             >
               <img
                 src={booking.image}
@@ -75,13 +75,13 @@ const BookingCard = ({ myBookingPromise }) => {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <div className="space-y-2">
-                <h3 className="text-xl font-bold text-blue-700 dark:text-blue-300">
+                <h3 className="text-xl font-bold text-[#f95f35] ">
                   {booking.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                <p className="text-base-content text-sm">
                   {booking.description?.slice(0, 100)}...
                 </p>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-base-content ">
                   <p>
                     <strong>Type:</strong> {booking.type}
                   </p>
@@ -95,7 +95,7 @@ const BookingCard = ({ myBookingPromise }) => {
               </div>
               <button
                 onClick={() => handleCancel(booking._id)}
-                className="btn btn-outline bg-amber-100 rounded-xl hover:bg-red-600 text-xl w-full text-center my-3"
+                className="btn btn-outline bg-bg-[#f95f35] rounded-xl hover:bg-red-600 text-xl w-full text-center my-3"
               >
                 Cancel
               </button>

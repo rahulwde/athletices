@@ -15,6 +15,7 @@ import ManageEvent from "../Dashbord/ManageEvent";
 import UpdateEvent from "../Dashbord/UpdateEvent";
 import About from "../Pages/About";
 import BookEvent from "../Event/BookEvent";
+import Contact from "../components/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
             <ManageEvent></ManageEvent>
           </PrivateRoute>
         ),
+      },
+      {
+       path:"contact",
+       element:<Contact/>
       },
       {
         path: "updateEvent/:id",

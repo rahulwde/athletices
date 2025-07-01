@@ -124,7 +124,7 @@ const EventDetails = () => {
             readOnly
           />
           <button
-            className="btn btn-neutral w-full mt-4"
+            className="btn bg-[#f95f35] w-full mt-4"
             onClick={handleBooking}
           >
             Book Now

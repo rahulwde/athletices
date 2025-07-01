@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className=" py-10 mt-16">
+    <footer className=" py-10 mt-16 bg-[#083344] text-white rounded-tr-4xl rounded-tl-4xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         
         {/* Logo and Tagline */}
@@ -21,8 +21,8 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-2">Navigation</h3>
           <ul className="space-y-1 text-sm">
-            <li><Link to="/" className="hover:text-blue-300">Home</Link></li>
-            <li><Link to="/events" className="hover:text-blue-300">Events</Link></li>
+            <li><Link to="/" className="hover:text-base-content">Home</Link></li>
+            <li><Link to="/event" className="hover:text-blue-300">Events</Link></li>
             <li><Link to="/about" className="hover:text-blue-300">About</Link></li>
             <li><Link to="/contact" className="hover:text-blue-300">Contact</Link></li>
           </ul>
@@ -31,10 +31,10 @@ const Footer = () => {
         {/* Private Routes */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Dashboard</h3>
-          <ul className="space-y-1 text-sm">
-            <li><Link to="/book-event" className="hover:text-blue-300">Book Event</Link></li>
-            <li><Link to="/my-bookings" className="hover:text-blue-300">My Bookings</Link></li>
-            <li><Link to="/manage-events" className="hover:text-blue-300">Manage Events</Link></li>
+          <ul className="space-y-1 text-sm ">
+            <li><Link to="/bookEvent" className="hover:text-blue-300">Book Event</Link></li>
+            <li><Link to="/myBooking" className="hover:text-blue-300">My Bookings</Link></li>
+            <li><Link to="/manageEvent" className="hover:text-blue-300">Manage Events</Link></li>
           </ul>
         </div>
 

@@ -17,7 +17,7 @@ const MainLayout = () => {
     return <Loader></Loader>
   }
   return (
-    <div>
+    <div className='bg-background'>
       <Navbar></Navbar>
      <div className='min-h-screen'>
        <Outlet></Outlet>

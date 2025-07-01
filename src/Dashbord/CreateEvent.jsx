@@ -32,10 +32,10 @@ const CreateEvent = () => {
   };
 
   return (
-    <Wrapper className="max-w-2xl mx-auto p-6 mt-10 rounded-2xl shadow-lg">
+    <Wrapper className="max-w-2xl bg-base-200 mx-auto p-6 mt-10 rounded-2xl  bg-base-300 shadow-lg">
       <title>CreateEvent - Athletics</title>
 
-      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-8">
+      <h2 className="text-3xl font-semibold text-center text-[#f95f35] mb-8">
         Create New Event
       </h2>
 
@@ -114,7 +114,7 @@ const CreateEvent = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-3 bg-blue-600 hover:bg-blue-700 font-semibold rounded-xl shadow"
+          className="w-full py-3 bg-[#f95f35] text-base-content font-semibold rounded-xl shadow"
         >
           Create Event
         </button>
@@ -126,7 +126,7 @@ const CreateEvent = () => {
 export default CreateEvent;
 
 const Wrapper = styled.div`
-  background-color: #f9fafb;
+ 
 `;
 
 const Label = styled.label`

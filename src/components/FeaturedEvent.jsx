@@ -8,10 +8,10 @@ const FeaturedEvent = ({ athleticPromise }) => {
    
 
   return (
-    <div className='max-w-7xl mx-auto px-4'>
+    <div className='max-w-7xl bg-background mx-auto px-4'>
       <div className='text-center my-10'>
         <motion.h2
-          className="text-4xl font-bold text-blue-700 mb-8"
+          className="text-4xl font-bold text-[#f95f35] mb-8"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -28,7 +28,7 @@ const FeaturedEvent = ({ athleticPromise }) => {
           }
         </div>
 
-      <Link to="/event"> <button   className="btn btn-primary px-4 my-4 text-white font-bold">See All</button></Link>
+      <Link to="/event"> <button   className="btn bg-[#f95f35] px-4 my-4 text-white font-bold">See All</button></Link>
       </div>
     </div>
   );
