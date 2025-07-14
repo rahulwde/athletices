@@ -1,6 +1,6 @@
 ## 🔗 Live Links
 
-- [Live Website](https://athletice-auth.web.app/)
+- [Live Website](https://athletic-event.netlify.app/)
  
 ## 📋 Project Overview
 
