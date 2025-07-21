@@ -63,7 +63,7 @@ const Login = () => {
     
     </div>
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
+      <h2 className="text-2xl font-bold mb-6 text-center text-[#f95f35]">
       Login to Swimmer Event
     </h2>
 
@@ -109,9 +109,9 @@ const Login = () => {
       </button>
     </StyledWrapper>
 
-    <p className="text-sm text-center mt-4 text-gray-700 dark:text-gray-300">
+    <p className="text-sm text-center mt-4 text-[#f95f35] dark:text-gray-300">
       Don’t have an account?{" "}
-      <Link to="/register" className="text-blue-600 dark:text-blue-400 hover:underline">
+      <Link to="/register" className="text-[#f95f35] hover:underline">
         Signup
       </Link>
     </p>

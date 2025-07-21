@@ -12,7 +12,9 @@ const Home = () => {
     "https://athletics-server.vercel.app/athletics/public/get"
   ).then((res) => res.json());
   return (
-    <div className="max-w-7xl mx-auto">
+    <div>
+      <Banner></Banner>
+  <div className="max-w-7xl mx-auto">
       <Helmet>
         <title>Home - Athletics</title>
         <meta
@@ -20,7 +22,6 @@ const Home = () => {
           content="Browse and post freelance tasks on TaskMarket."
         />
       </Helmet>
-      <Banner></Banner>
       <Suspense fallback={<Loader></Loader>}>
         <FeaturedEvent athleticPromise={athleticPromise}></FeaturedEvent>
       </Suspense>
@@ -28,6 +29,8 @@ const Home = () => {
       <PopularSports></PopularSports>
       <Pricing/>
     </div>
+    </div>
+  
   );
 };
 

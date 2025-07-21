@@ -77,7 +77,7 @@ const Register = () => {
               </div>
 
       <div>
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
+          <h2 className="text-2xl font-bold mb-6 text-center text-[#f95f35]">
           Register to Swimmer Event
         </h2>
     
@@ -127,7 +127,7 @@ const Register = () => {
         </StyledWrapper>
         </form>
     
-        <div className="text-center my-4 text-sm text-gray-600 dark:text-gray-400">or</div>
+        <div className="text-center my-4 text-sm text-[#f95f35] ">or</div>
     
        <StyledWrapper>
           <button className="button w-full">
@@ -138,9 +138,9 @@ const Register = () => {
           </button>
         </StyledWrapper>
     
-        <p className="text-sm text-center mt-4 text-gray-700 dark:text-gray-300">
+        <p className="text-sm text-center mt-4 text-[#f95f35] dark:text-gray-300">
           Don’t have an account?{" "}
-          <Link to="/login" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <Link to="/login" className="text-blue-600 text-[#f95f35]dark:text-blue-400 hover:underline">
             Login
           </Link>
         </p>
