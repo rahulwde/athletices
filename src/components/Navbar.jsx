@@ -53,7 +53,9 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="w-36">
+   {user && 
+    <>
+       <li className="w-36">
         <NavLink
           to="/createEvent"
           className={({ isActive }) =>
@@ -70,6 +72,10 @@ const Navbar = () => {
         </NavLink>
       </li>
 
+    
+    </>
+   
+   }
       <li className="w-36">
         <NavLink
           to="/contact"
