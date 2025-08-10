@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <div className="-z-10">
+    <div className="-z-10 rounded-2xl">
       <Carousel
         autoPlay
         infiniteLoop
