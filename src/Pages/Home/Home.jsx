@@ -16,7 +16,7 @@ const Home = () => {
       <Banner></Banner>
   <div className="max-w-7xl mx-auto">
       <Helmet>
-        <title>Home - Athletics</title>
+        <title>Home- Athletics</title>
         <meta
           name="description"
           content="Browse and post freelance tasks on TaskMarket."
