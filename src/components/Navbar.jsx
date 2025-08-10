@@ -12,7 +12,7 @@ import {
   AiOutlineInfoCircle,
 } from "react-icons/ai";
 import { IoMdContacts } from "react-icons/io";
-
+ 
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -110,7 +110,7 @@ const Navbar = () => {
       {/* Login/Register only for mobile dropdown */}
       {!user && (
         <>
-          <li>
+          <li className="lg:hidden" >
             <Link to="/login" className="text-white hover:text-[#083344]">
               Login
             </Link>
@@ -180,36 +180,91 @@ const Navbar = () => {
         )}
 
         {/* User Dropdown */}
-        {user && (
-          <StyledDropDown>
-            <div className="tooltip tooltip-bottom" data-tip={user.displayName || "user"}>
-              <label className="popup relative group">
-                <input type="checkbox" />
-                <div tabIndex={0} className="burger">
-                  <img
-                    src={user?.photoURL || "https://i.ibb.co/5xnXSnHB/logo2.png"}
-                    alt="User Avatar"
-                    className="w-24 rounded-full ring-2 ring-primary"
-                  />
-                </div>
-                <nav className="popup-window">
-                  <legend>Hi! {user.displayName}</legend>
-                  <ul>
-                    <li><NavLink to="/myBooking">MyBooking</NavLink></li>
-                    <li><NavLink to="/manageEvent">ManageEvent</NavLink></li>
-                    <li><NavLink to="/bookEvent">BookEvent</NavLink></li>
-                    <li>
-                      <button className="btn btn-ghost" onClick={handleLogOut}>
-                        <CiLogout /> Logout
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </label>
-            </div>
-          </StyledDropDown>
-        )}
+    {user && (
+  <StyledDropDown>
+    <div
+      className="tooltip tooltip-bottom"
+      data-tip={user.displayName || "user"}
+    >
+      <label className="popup relative group">
+        <input type="checkbox" />
+        {/* Avatar */}
+        <div
+          tabIndex={0}
+          className="burger cursor-pointer transition-transform duration-200 hover:scale-105"
+        >
+          <img
+            src={user?.photoURL || "https://i.ibb.co/5xnXSnHB/logo2.png"}
+            alt="User Avatar"
+            className="w-16 h-16 rounded-full ring-2 ring-primary shadow-md"
+          />
+        </div>
 
+        {/* Dropdown */}
+        <nav
+          className="popup-window absolute right-0 mt-3 w-56 bg-[#083344] text-white rounded-xl shadow-xl transform origin-top scale-95 opacity-0 
+          group-focus-within:opacity-100 group-focus-within:scale-100 transition-all duration-300 ease-out"
+        >
+          <legend className="px-4 py-3 border-b border-gray-600 text-sm font-medium">
+            Hi! {user.displayName}
+          </legend>
+          <ul className="py-2">
+            <li>
+              <NavLink
+                to="/myBooking"
+                className={({ isActive }) =>
+                  `block px-4 py-2 transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[#f95f35] text-[#083344] font-semibold"
+                      : "hover:bg-[#f95f35] hover:text-[#083344]"
+                  }`
+                }
+              >
+                MyBooking
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/manageEvent"
+                className={({ isActive }) =>
+                  `block px-4 py-2 transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[#f95f35] text-[#083344] font-semibold"
+                      : "hover:bg-[#f95f35] hover:text-[#083344]"
+                  }`
+                }
+              >
+                ManageEvent
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/bookEvent"
+                className={({ isActive }) =>
+                  `block px-4 py-2 transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[#f95f35] text-[#083344] font-semibold"
+                      : "hover:bg-[#f95f35] hover:text-[#083344]"
+                  }`
+                }
+              >
+                BookEvent
+              </NavLink>
+            </li>
+            <li>
+              <button
+                className="w-full text-left px-4 py-2 flex items-center gap-2 hover:bg-[#f95f35] hover:text-[#083344] transition-colors duration-200"
+                onClick={handleLogOut}
+              >
+                  Logout
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </label>
+    </div>
+  </StyledDropDown>
+)}
         <ThemeToggle />
       </div>
     </div>
